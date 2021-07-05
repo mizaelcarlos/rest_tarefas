@@ -37,11 +37,18 @@ class TarefaController extends Controller
     public function store(Request $request){
 
         $data_hora = date("Y/m/d H:i:s");
-
+		if($request->feita == 'Sim'){
+			
+			$feita = true;
+		}
+		else
+		{
+			$feita = false;
+		}
         $tarefa = new Tarefa();
         $tarefa->titulo = $request->titulo;
         $tarefa->descricao = $request->descricao;
-        $tarefa->feita = $request->feita;
+        $tarefa->feita = $feita;
         $tarefa->tipo_id = $request->tipo_id;
         $tarefa->created_at = $data_hora;
         $tarefa->save();
@@ -53,11 +60,20 @@ class TarefaController extends Controller
     public function update(Request $request, $tarefa){
 
         $data_hora = date("Y/m/d H:i:s");
-
+		
+		if($request->feita == 'Sim'){
+			
+			$feita = true;
+		}
+		else
+		{
+			$feita = false;
+		}
+		
         $tarefa = Tarefa::find($tarefa);
         $tarefa->titulo = $request->titulo;
         $tarefa->descricao = $request->descricao;
-        $tarefa->feita = $request->feita;
+        $tarefa->feita = $feita;
         $tarefa->tipo_id = $request->tipo_id;
         
         $tarefa->update();
