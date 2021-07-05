@@ -7,5 +7,5 @@ class Tarefa extends Model
 {
 
     protected $fillable = ['titulo', 'descricao', 'feita' , 'tipo_id'];
-
+	protected $table = 'tarefas';
 }

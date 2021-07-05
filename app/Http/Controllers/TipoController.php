@@ -23,10 +23,10 @@ class TipoController extends Controller
         return Tipo::all();
     }
 
-    public function show($tipo)
+    public function show($id)
     {
 
-        return Tipo::find($tipo);
+        return Tipo::find($id);
     }
 
     public function store(Request $request){

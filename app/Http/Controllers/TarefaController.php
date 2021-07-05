@@ -18,9 +18,14 @@ class TarefaController extends Controller
 
     }
 
-    public function index()
+    public function a_fazer()
     {
-        return Tarefa::all();
+        return Tarefa::where('feita',false)->get();
+    }
+	
+	public function feitas()
+    {
+        return Tarefa::where('feita',true)->get();
     }
 
     public function show($tarefa)
@@ -54,13 +59,24 @@ class TarefaController extends Controller
         $tarefa->descricao = $request->descricao;
         $tarefa->feita = $request->feita;
         $tarefa->tipo_id = $request->tipo_id;
-        $tarefa->updated_at = $data_hora;
+        
         $tarefa->update();
 
         return response()->json(['message' => 'Tarefa atualizada com sucesso']);
 
     }
 
+	public function concluir($tarefa){
+		$data_hora = date("Y/m/d H:i:s");
+		
+        $tarefa = Tarefa::find($tarefa);
+		$tarefa->feita = true;
+		$tarefa->updated_at = $data_hora;
+        $tarefa->update();   
+        
+        return response()->json(['message' => 'Tarefa excluída com sucesso']);
+    }
+	
     public function destroy($tarefa){
 
         $tarefa = Tarefa::find($tarefa);

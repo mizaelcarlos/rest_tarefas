@@ -20,11 +20,13 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'tarefas'], function() use ($router){
 
-    $router->get('/','TarefaController@index');
+    $router->get('/a_fazer','TarefaController@a_fazer');
+	$router->get('/feitas','TarefaController@feitas');
     $router->get('/{tarefa}','TarefaController@show');
 
     $router->post('/novo','TarefaController@store');
-    $router->put('/{tarefa}','TarefaController@update');
+    $router->put('/atualizar/{tarefa}','TarefaController@update');
+	$router->put('/concluir/{tarefa}','TarefaController@concluir');
     $router->delete('/{tarefa}','TarefaController@destroy');
 
 
@@ -39,10 +41,9 @@ $router->group(['prefix' => 'tarefas'], function() use ($router){
 $router->group(['prefix' => 'tipo'], function() use ($router){
 
     $router->get('/','TipoController@index');
-    $router->get('/{tipo}','TipoController@show');
-
+    $router->get('/visualizar/{id}','TipoController@show');
     $router->post('/novo','TipoController@store');
-    $router->put('/{tipo}','TipoController@update');
+    $router->put('/atualizar/{tipo}','TipoController@update');
     $router->delete('/{tipo}','TipoController@destroy');
 
 
